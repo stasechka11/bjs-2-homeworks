@@ -21,7 +21,11 @@ function getArrayParams(...arr) {
 }
 
 function summElementsWorker(...arr) {
+  let summElements = arr.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue
+}, 0) ;
 
+  return summElements;
 }
 
 function differenceMaxMinWorker(...arr) {
