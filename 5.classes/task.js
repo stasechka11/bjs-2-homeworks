@@ -89,3 +89,62 @@ class Library {
         return null;
     }
 }
+
+/*
+Тестовые сценарии 
+*/
+// 1. Создайте библиотеку
+const library = new Library("Библиотека имени А.С. Пушкина");
+
+// 2. Добавьте в библиотеку несколько печатных изданий разных типов
+library.addBook(
+    new DetectiveBook(
+      "Артур Конан Дойл",
+      "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе",
+      2019,
+      1008
+    )
+   );
+
+library.addBook(
+    new FantasticBook(
+      "Аркадий и Борис Стругацкие",
+      "Пикник на обочине",
+      1972,
+      168
+    )
+   );
+library.addBook(new NovelBook(
+    "Герберт Уэллс", 
+    "Машина времени", 
+    1895, 
+    138));
+
+library.addBook(new NovelBook(
+    "Алексей Толстой", 
+    "Граф Калиостро", 
+    1919, 
+    20));
+
+
+// 3. Найдите книгу, изданную в 1919 году
+console.log(library.findBookBy("releaseDate", 1919).name); 
+
+// 4. Выдайте любую книгу
+console.log("Количество книг до выдачи: " + library.books.length);
+const givenBook = library.giveBookByName("Машина времени");
+console.log(givenBook);
+console.log("Количество книг после выдачи: " + library.books.length);
+
+// 5. Повредите выданную книгу
+console.log("Состояние выданной книги до повреждения: " + givenBook.state);
+givenBook.state = 10;
+console.log("Состояние выданной книги после повреждения: " + givenBook.state);
+
+// 6. Восстановите выданную книгу
+givenBook.state = 30;
+console.log("Состояние выданной книги после восстановления: " + givenBook.state);
+
+// 7. Попытайтесь добавить восстановленную книгу обратно в библиотеку
+library.addBook(givenBook);
+console.log("Количество книг после добавления: " + library.books.length);
