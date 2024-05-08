@@ -12,7 +12,7 @@ class PrintEditionItem {
     }
 
     set state(newState) {
-        if(newState < 0){
+        if (newState < 0){
             this._state = 0;
         } else if(newState > 100){
             this._state = 100;
@@ -59,5 +59,33 @@ class DetectiveBook extends Book {
     constructor(author, name, releaseDate, pagesCount) {
         super(author, name, releaseDate, pagesCount);
         this.type = "detective";
+    }
+}
+
+
+class Library {
+    constructor(name, books) {
+        this.name = name;
+        this.books = [];
+    }
+
+    addBook(book) {
+        if (book.state > 30) {
+            this.books.push(book);
+        }
+    }
+
+    findBookBy(type, value) {
+        const findedByParamBook = this.books.find(item => item[type] === value);
+        return !!findedByParamBook ? findedByParamBook : null;
+    }
+
+    giveBookByName(bookName) {
+        const bookIndex = this.books.findIndex(book => book.name === bookName);
+        if (bookIndex !== -1) {
+            return this.books.splice(bookIndex, 1)[0];
+        }
+
+        return null;
     }
 }
