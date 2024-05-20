@@ -24,30 +24,28 @@ function cachingDecoratorNew(func) {
 //Задача № 2
 function debounceDecoratorNew(func, delay) {
   let timeoutId = null; 
-  let count = 0;
-  let allCount = 0;
+  wrapper.count = 0;
+  wrapper.allCount = 0;
 
   function wrapper(...args) {
     if (timeoutId) {
         console.log("Уже есть таймаут", args);
         clearTimeout(timeoutId);
-        allCount++;
     }
 
     if (!timeoutId) {
         console.log("Отправлен первый сигнал", args);
         func.apply(this, args);
-        count++;
+        wrapper.count++;
     }
 
     timeoutId = setTimeout(() => {
         console.log("Сработал таймаут", args);
-        count++;
+        wrapper.count++;
         func.apply(this, args);
-        wrapper.count = count;
     }, delay);
-    
-    wrapper.allCount = allCount;
+
+    wrapper.allCount++;
   }
 
   return wrapper;
